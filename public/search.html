@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <!-- Meta Tag Penting -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hasil pencarian film dan series.">
+  <title>Hasil Pencarian - FilmFilmAn</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Eksternal CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ============================================================= -->
+  <!-- HEADER: Logo, Pencarian, dan Pengaturan                      -->
+  <!-- ============================================================= -->
+  <header>
+    <div class="container">
+      <div class="header-top">
+        <!-- Logo Situs -->
+        <a href="index.html" class="logo">FilmFilmAn</a>
+
+        <!-- Kontrol Pencarian dan Pengaturan -->
+        <div class="header-controls">
+          <div class="search-container">
+            <label for="search-input" class="sr-only">Cari</label>
+            <input type="text" id="search-input" placeholder="Cari judul film, series...">
+            <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+          </div>
+          <!-- Tombol Pengaturan -->
+          <button id="settings-toggle-btn" title="Pengaturan">
+            <i class="fas fa-cog"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <nav class="nav-menu">
+        <li><a href="index.html" class="nav-link active">Beranda</a></li>
+        <li><a href="discover.html" class="nav-link">Discover</a></li>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================= -->
+  <!-- MAIN: Area Konten Hasil Pencarian                          -->
+  <!-- ============================================================= -->
+  <main>
+    <div class="container">
+      <!-- Header Hasil Pencarian -->
+      <div class="search-header">
+        <h2>Hasil Pencarian untuk: "<span id="search-query"></span>"</h2>
+        <!-- INFORMASI JUMLAH HASIL (BARU) -->
+        <div class="result-info">
+          <span id="total-results">0</span> hasil ditemukan
+        </div>
+      </div>
+
+      <!-- Grid untuk Menampung Hasil -->
+      <div class="media-grid" id="search-results-grid">
+        <!-- Hasil akan dimuat secara dinamis oleh JavaScript -->
+        <div class="spinner"></div>
+      </div>
+
+      <!-- KONTROL PAGINASI (BARU) -->
+      <div class="pagination-controls">
+        <button class="page-btn" id="prev-page-btn" title="Halaman Sebelumnya">
+          <i class="fas fa-angle-left"></i>
+        </button>
+
+        <div class="page-info">
+          <span>Halaman</span>
+          <input type="number" id="current-page-input" value="1" min="1">
+          <span>dari <span id="total-pages">1</span></span>
+        </div>
+
+        <button class="page-btn" id="next-page-btn" title="Halaman Selanjutnya">
+          <i class="fas fa-angle-right"></i>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ... (sisanya dari file HTML Anda) ... -->
+
+  <!-- ============================================================= -->
+  <!-- MODAL: Detail Film/Series & Pemutar Video                     -->
+  <!-- ============================================================= -->
+  <!-- Modal ini sama dengan yang ada di index.html -->
+  <div id="media-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" id="close-modal">&times;</button>
+      <div class="media-details">
+        <img id="modal-poster" class="modal-poster" src="" alt="Poster">
+        <div class="modal-info">
+          <h2 id="modal-title"></h2>
+          <p id="modal-meta"></p>
+          <p id="modal-overview"></p>
+
+          <div class="modal-controls">
+            <div class="server-selector">
+              <label for="server-select">Pilih Server:</label>
+              <select id="server-select">
+                <!-- Opsi server akan dimuat oleh JavaScript dari config.js -->
+              </select>
+            </div>
+          </div>
+
+          <!-- SEASON & EPISODE SELECTOR -->
+          <div id="series-selector" class="series-selector" style="display: none;">
+            <div class="selector-group">
+              <label for="season-select">Pilih Season:</label>
+              <select id="season-select">
+                <!-- Opsi season akan dimuat oleh JavaScript -->
+              </select>
+            </div>
+            <div class="selector-group">
+              <label for="episode-select">Pilih Episode:</label>
+              <select id="episode-select">
+                <!-- Opsi episode akan dimuat oleh JavaScript -->
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="video-container">
+        <iframe id="video-player" class="video-player" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- MODAL KHUSUS: Pengaturan                                     -->
+  <!-- ============================================================= -->
+  <!-- Modal ini sama dengan yang ada di index.html -->
+  <div id="settings-modal" class="modal">
+    <div class="modal-content modal-content-settings">
+      <button class="close-modal" id="close-settings-modal">&times;</button>
+      <div class="settings-details">
+        <h2>Pengaturan</h2>
+
+        <!-- PENGATURAN BAHASA -->
+        <div class="setting-group">
+          <label for="language-select">Bahasa:</label>
+          <select id="language-select">
+            <option value="id-ID">Bahasa Indonesia</option>
+            <option value="en-US">English</option>
+          </select>
+        </div>
+
+        <!-- PENGATURAN KONTEN DEWASA -->
+        <div class="setting-group">
+          <label for="adult-content-toggle">Sertakan konten dewasa:</label>
+          <label class="switch">
+            <input type="checkbox" id="adult-content-toggle">
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <!-- PENCARIAN IMDb ID -->
+        <div class="setting-group setting-group--full-width">
+          <h3>Pencarian Khusus</h3>
+          <label for="imdb-id-input">Cari dengan IMDb ID:</label>
+          <div class="imdb-search-container">
+            <input type="text" id="imdb-id-input" placeholder="Contoh: tt0111161">
+            <button id="imdb-search-btn">Cari</button>
+          </div>
+        </div>
+
+        <button id="save-settings-btn" class="save-settings-btn">Simpan Pengaturan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- JAVASCRIPT                                                      -->
+  <!-- ============================================================= -->
+  <!-- <script src="js/config.js"></script> -->
+  <script type="module" src="js/app.js"></script>
+  <!-- Muat file konfigurasi terlebih dahulu -->
+  <!-- <script src="js/config.js"></script> -->
+  <!-- Kita akan membuat file search.js nanti -->
+  <!-- <script src="js/search.js"></script> -->
+</body>
+
+</html>

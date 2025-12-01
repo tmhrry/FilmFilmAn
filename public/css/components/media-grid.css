@@ -1,0 +1,64 @@
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  /* Lebar kartu lebih kecil */
+  gap: 1rem;
+}
+
+.media-card {
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  /* Agar semua kartu memiliki tinggi yang sama */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.media-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(201, 169, 97, 0.2);
+}
+
+.media-poster {
+  width: 100%;
+  height: 225px;
+  /* Rasio 2:3 */
+  object-fit: cover;
+  display: block;
+}
+
+.media-info {
+  padding: 1rem;
+  background: linear-gradient(to top, var(--secondary-color), rgba(26, 26, 26, 0.8));
+  flex-grow: 1;
+  /* Biarkan info mengisi sisa ruang */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Dorong judul ke atas, tahun ke bawah */
+}
+
+.media-title {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  /* Batasi hingga 2 baris */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.media-year {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}

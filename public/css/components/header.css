@@ -1,0 +1,91 @@
+/* ============================================================= */
+/* 3. HEADER                                                     */
+/* ============================================================= */
+header {
+  background-color: rgba(26, 26, 26, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  text-decoration: none;
+  text-shadow: 2px 2px 4px var(--shadow-color);
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: var(--accent-hover);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-container {
+  display: flex;
+  align-items: stretch;
+  background-color: #0f0f0f;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.search-container:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px rgba(201, 169, 97, 0.3);
+}
+
+.search-container input {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  width: 250px;
+  outline: none;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+}
+
+.search-container button {
+  background-color: var(--accent-color);
+  border: none;
+  color: var(--primary-color);
+  padding: 0 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+  background-color: var(--accent-hover);
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1rem;
+}
+
+.nav-link {
+  padding: 0.5rem;
+  border: 2px solid #e0e0e0;
+  background-color: #333333;
+}

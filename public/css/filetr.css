@@ -1,0 +1,241 @@
+/* ============================================================= */
+/* 1. KONTAINER UTAMA HALAMAN FILTER (DUA KOLOM)              */
+/* ============================================================= */
+.filter-page-container {
+  display: flex;
+  height: 100vh;
+  /* Gunakan tinggi penuh layar */
+  overflow: hidden;
+  /* Cegah scroll di tingkat kontainer */
+}
+
+/* ============================================================= */
+/* 2. SIDEBAR FILTER (KIRI)                                     */
+/* ============================================================= */
+.filter-sidebar {
+  width: 300px;
+  /* Lebar tetap untuk sidebar */
+  flex-shrink: 0;
+  /* Jangan mengecil */
+  background-color: var(--secondary-color);
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  /* Scroll jika konten terlalu panjang */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+/* Header Sidebar */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--primary-color);
+}
+
+.sidebar-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.close-sidebar-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-sidebar-btn:hover {
+  color: var(--text-color);
+}
+
+/* Konten Filter */
+.filter-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Grup Filter */
+.filter-group label {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.filter-group select,
+.filter-group input[type="number"] {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-group select:focus,
+.filter-group input[type="number"]:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px rgba(201, 169, 97, 0.3);
+}
+
+/* Checkbox Genre */
+.genre-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Dua kolom */
+  gap: 0.75rem;
+}
+
+.genre-checkboxes label {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.genre-checkboxes input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* Tombol Aksi */
+.filter-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.action-btn {
+  flex-grow: 1;
+  /* Tombol "Reset" lebih kecil */
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.action-btn.apply-btn {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+}
+
+.action-btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* ============================================================= */
+/* 3. AREA HASIL FILTER (KANAN)                              */
+/* ============================================================= */
+.filter-results-main {
+  flex-grow: 1;
+  /* Isi sisa ruang */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* Scroll untuk grid hasil */
+}
+
+/* Header Hasil */
+.search-header {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--secondary-color);
+}
+
+.search-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Grid Hasil (sama dengan grid di halaman lain) */
+.filter-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+/* Kontrol Paginasi (sama dengan halaman lain) */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* ============================================================= */
+/* 4. RESPONSIVE DESIGN (UNTUK LAYAR KECIL)                       */
+/* ============================================================= */
+@media (max-width: 768px) {
+
+  /* Sembunyikan sidebar desktop */
+  .filter-sidebar {
+    display: none;
+    /* Sembunyikan sidebar default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 150;
+    /* Di atas modal */
+    border-right: none;
+    transform: translateX(-100%);
+    /* Sembunyikan di luar layar */
+    transition: transform 0.3s ease;
+  }
+
+  /* Tampilkan sidebar saat aktif */
+  .filter-sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Overlay latar untuk sidebar mobile */
+  .sidebar-overlay {
+    display: none;
+    /* Sembunyikan default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.5);
+    z-index: 140;
+    /* Di bawah sidebar */
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+  }
+
+  /* Konten utama mengambil seluruh lebar di mobile */
+  .filter-results-main {
+    width: 100%;
+  }
+}
