@@ -14,6 +14,21 @@ import { SearchPage } from './pages/search.js';
 import { DiscoverPage } from './pages/discover.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- TAMBAHKAN BLOK MIGRASI INI ---
+    const oldSettingsKey = 'movieStreamSettings';
+    const newSettingsKey = 'filmFilmanSettings';
+
+    // Cek apakah ada pengaturan lama dan belum ada pengaturan baru
+    if (localStorage.getItem(oldSettingsKey) && !localStorage.getItem(newSettingsKey)) {
+        console.log('Migrating settings from MovieStream to FilmFilmAn...');
+        // Pindahkan pengaturan lama ke kunci baru
+        localStorage.setItem(newSettingsKey, localStorage.getItem(oldSettingsKey));
+        // Hapus pengaturan lama untuk membersihkan
+        localStorage.removeItem(oldSettingsKey);
+        console.log('Migration complete.');
+    }
+    // --- AKHIR BLOK MIGRASI ---
+    
     // Inisialisasi komponen modal
     const mediaModal = new MediaModal();
         // TERUSKAN instance mediaModal ke SettingsModal
